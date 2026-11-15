@@ -48,4 +48,44 @@ repository's build/test tooling. It declares no mandatory MCP servers or additio
 packages. Configure model preferences, authentication, and project dependencies on each
 device separately. Director scheduling is optional; the protocol includes a fallback.
 
+## Mehmet's AI Review
+
+[`skills/mehmets-ai-review/SKILL.md`](skills/mehmets-ai-review/SKILL.md) defines a
+multi-model branch and pull-request review workflow. It combines independent reviewers,
+evidence-backed findings, a second-pass audit, and a local review report.
+
+### Install on Windows
+
+After cloning this repository as shown above:
+
+```powershell
+New-Item -ItemType Directory -Force "$HOME\.copilot\skills" | Out-Null
+Copy-Item "$HOME\magical-skills\skills\mehmets-ai-review" "$HOME\.copilot\skills\" -Recurse -Force
+```
+
+In Copilot CLI:
+
+```text
+/skills reload
+/skills info mehmets-ai-review
+Use /mehmets-ai-review to review my current branch
+```
+
+### Update
+
+```powershell
+git -C "$HOME\magical-skills" pull --ff-only
+Copy-Item "$HOME\magical-skills\skills\mehmets-ai-review" "$HOME\.copilot\skills\" -Recurse -Force
+```
+
+Run `/skills reload` afterward.
+
+### Requirements and portability
+
+The original skill is included unchanged. It uses Git, subagents, and file/shell tools,
+and prefers three models from different vendors when available. It includes Azure
+DevOps-specific tool names and repository-specific examples; those tools, paths, and
+conventions must be adapted to the repository being reviewed. External authentication
+and model availability are configured separately, not installed by copying the skill.
+
 See the [official Copilot CLI skill documentation](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills).
