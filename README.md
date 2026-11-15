@@ -88,4 +88,47 @@ DevOps-specific tool names and repository-specific examples; those tools, paths,
 conventions must be adapted to the repository being reviewed. External authentication
 and model availability are configured separately, not installed by copying the skill.
 
+## PR Quality Review and Fix Loop
+
+These skills are copied unchanged from
+[`Gundwane21/ai-jobs`](https://github.com/Gundwane21/ai-jobs/tree/903dd7d00ea1f3aadf1b8588c0c7f784a25c6317/.agents/skills)
+at commit `903dd7d00ea1f3aadf1b8588c0c7f784a25c6317`.
+The original repository retains its copies.
+
+- [`pr-quality-review`](skills/pr-quality-review/SKILL.md) reviews a captured PR
+  revision with independent reviewers and verified findings. By default, it posts
+  one PR summary. Request report-only output to prevent publication.
+- [`pr-review-fix-loop`](skills/pr-review-fix-loop/SKILL.md) performs an explicitly
+  requested review, fix, and verification loop for at most five rounds. By default,
+  it commits and pushes only a clean result. Request local-only changes to prevent
+  commits and pushes.
+
+Install both directories together. The fix loop uses
+`pr-quality-review/reviewers.md`. Each directory includes the source MIT license.
+The skills reference AI jobs standards and contracts, including
+`CODING_STANDARDS.md`, `PYTHON_CODING_REFERENCES.md`, and `docs/README.md`.
+Adapt those document references when using the skills in another repository.
+Automatic post-create or post-push invocation requires a trusted repository
+instruction; copying the skills does not configure that instruction.
+
+### Install on macOS or Linux
+
+From your clone of this repository:
+
+```bash
+mkdir -p "$HOME/.copilot/skills"
+cp -R skills/pr-quality-review skills/pr-review-fix-loop "$HOME/.copilot/skills/"
+```
+
+### Install on Windows
+
+```powershell
+New-Item -ItemType Directory -Force "$HOME\.copilot\skills" | Out-Null
+Copy-Item "$HOME\magical-skills\skills\pr-quality-review" "$HOME\.copilot\skills\" -Recurse -Force
+Copy-Item "$HOME\magical-skills\skills\pr-review-fix-loop" "$HOME\.copilot\skills\" -Recurse -Force
+```
+
+Start a new Copilot session after installation. In Copilot CLI, you can also run
+`/skills reload`.
+
 See the [official Copilot CLI skill documentation](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/add-skills).
